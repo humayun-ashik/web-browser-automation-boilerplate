@@ -2,8 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Web Test Suite" thread-count="1" parallel="tests" verbose="1">
+    <parameter name="browser" value="chrome" />
+    <listeners>
+
+        <listener class-name="Listener.TestListener"></listener>
+        <listener class-name="Listener.AnnotationTransformer"></listener>
+
+    </listeners>
     <test name=" Login Test - chrome" parallel="methods" thread-count="1">
-        <parameter name="browser" value="chrome" />
+
         <classes>
             <class name="test.automation.LoginTest"></class>
         </classes>

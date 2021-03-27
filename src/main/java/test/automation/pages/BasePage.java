@@ -4,24 +4,48 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BasePage extends Page {
+
+public class BasePage{
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+
+    }
+    //Click Method
+    public void click(By elementLocation) {
+        waitVisibility(elementLocation);
+        driver.findElement(elementLocation).click();
     }
 
-    @Override
+    //Write Text
+    public void writeText(By elementLocation, String text) {
+        waitVisibility(elementLocation);
+        driver.findElement(elementLocation).sendKeys(text);
+    }
+
+    //Read Text
+    public String readText(By elementLocation) {
+        waitVisibility(elementLocation);
+        return driver.findElement(elementLocation).getText();
+    }
+
+    //Wait
+    public void waitVisibility(By by){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
     public String getPageTitle() {
         return driver.getTitle();
     }
 
-    @Override
     public String getPageHeader(By locator) {
         return getElementBy(locator).getText();
     }
 
-    @Override
     public WebElement getElementBy(By locator) {
         WebElement element = null;
 
@@ -36,7 +60,6 @@ public class BasePage extends Page {
         return element;
     }
 
-    @Override
     public void waitForElementPresent(By locator) {
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -46,7 +69,6 @@ public class BasePage extends Page {
 
     }
 
-    @Override
     public void waitForPageTitle(String title) {
         try {
             wait.until(ExpectedConditions.titleContains(title));
