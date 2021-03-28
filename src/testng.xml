@@ -12,8 +12,9 @@
     <test name=" Login Test - chrome" parallel="methods" thread-count="1">
 
         <classes>
-            <class name="test.automation.LoginTest"></class>
+            <class name="test.automation.RegistrationTest"></class>
         </classes>
+
     </test>
 
 </suite>

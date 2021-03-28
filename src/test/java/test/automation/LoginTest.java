@@ -28,10 +28,23 @@ public class LoginTest extends BaseTest {
         homePage
                 .goToHomePage()
                 .goToLoginPage()
-                .doLogin("john", "demo");
-//                .verifySuccessfulLogin("Welcome John Smith");
+                .doLogin("john", "demo")
+                //.verifySuccessfulLogin("Welcome John Smith")
+                .doLogout();
 
-        homePage .goToLoginPage().doLogout();
+    }
+
+    @Test (priority = 1, description="Invalid Login Scenario with wrong username and password.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Description("Login test with valid user name and password")
+    public void LoginWithInvalidPassword(Method method) throws Exception {
+
+        ExtentTestManager.startTest(method.getName(), "Invalid Login Scenario with wrong username and password.");
+        homePage
+                .goToHomePage()
+                .goToLoginPage()
+                .doLogin("", "");
+                //.verifySuccessfulLogin("Please enter a username and password.")
 
 
     }

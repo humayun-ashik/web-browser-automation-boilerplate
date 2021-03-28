@@ -17,6 +17,7 @@ public class LoginPage extends BasePage {
     private By loginbtn = By.xpath("//*[@id=\"loginPanel\"]/form/div[3]/input");
     private By logOutBtn = By.linkText("Log Out");
     public By welcomeTextClass = By.className("smallText");
+    public By loginErrorText = By.className("error");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -80,6 +81,12 @@ public class LoginPage extends BasePage {
     public LoginPage verifySuccessfulLogin(String expected){
         waitVisibility(welcomeTextClass);
         Assert.assertTrue(readText(welcomeTextClass).contains(expected));
+        //Assert.assertEquals(readText(welcomeTextClass), expected);
+        return this;
+    }
+    public LoginPage verifyUnsuccessfulLogin(String expected){
+        waitVisibility(loginErrorText);
+        Assert.assertTrue(readText(loginErrorText).contains(expected));
         //Assert.assertEquals(readText(welcomeTextClass), expected);
         return this;
     }
